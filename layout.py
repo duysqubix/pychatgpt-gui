@@ -1,5 +1,20 @@
 import PySimpleGUI as sg
 
+general_chat_layout = [
+    [
+        sg.Multiline("", key="gc_input_context", size=(50, 50)),
+        sg.Multiline(
+            key="gc_chat_log",
+            size=(50, 50),
+            autoscroll=True,
+            disabled=True,
+            reroute_stdout=True,
+            reroute_stderr=False,
+            write_only=True,
+        ),
+    ],
+    [sg.Button("Submit", key="gc_button"), sg.Button("Clear", key="gc_button_clear")],
+]
 
 email_writer_layout = [
     [
@@ -13,7 +28,7 @@ email_writer_layout = [
             disabled=True,
             # echo_stdout_stderr=True,
             reroute_stdout=True,
-            reroute_stderr=True,
+            reroute_stderr=False,
             write_only=True,
         ),
         sg.Multiline(
@@ -26,9 +41,7 @@ email_writer_layout = [
             size=(50, 50),
         ),
     ],
-    [
-        sg.Button("Submit", key="ew_button"),
-    ],
+    [sg.Button("Submit", key="ew_button"), sg.Button("Clear", key="ew_button_clear")],
 ]
 linkedin_post_writer = [[sg.T("This is inside Tab2")], [sg.In(key="in")]]
 
@@ -38,6 +51,7 @@ main_layout = [
         sg.TabGroup(
             [
                 [
+                    sg.Tab("General Chat", general_chat_layout, key="Tab_General_Chat"),
                     sg.Tab("Email Writer", email_writer_layout, key="Tab_Email_Writer"),
                     sg.Tab(
                         "LinkedIn Post", linkedin_post_writer, key="Tab_Post_Helper"
